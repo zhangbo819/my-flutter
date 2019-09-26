@@ -8,6 +8,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Startup Name Generator',
+      theme: new ThemeData(
+        primaryColor: Colors.white,
+      ),
       home: new RandomWords(),
     );
   }
@@ -55,7 +58,9 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildSuggestions() {
-    _suggestions.addAll(generateWordPairs().take(10));
+    if (_suggestions.length < 10) {
+      _suggestions.addAll(generateWordPairs().take(10));
+    }
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
         // 对于每个建议的单词对都会调用一次itemBuilder，然后将单词对添加到ListTile行中
